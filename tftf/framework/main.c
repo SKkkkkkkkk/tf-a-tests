@@ -573,11 +573,11 @@ void __dead2 tftf_cold_boot_main(void)
 
 	tftf_irq_setup();
 
-	rc = tftf_initialise_timer();
-	if (rc != 0) {
-		ERROR("Failed to initialize the timer subsystem (%d).\n", rc);
-		tftf_exit();
-	}
+	// rc = tftf_initialise_timer();
+	// if (rc != 0) {
+	// 	ERROR("Failed to initialize the timer subsystem (%d).\n", rc);
+	// 	tftf_exit();
+	// }
 
 	/* Enable the SGI used by the timer management framework */
 	tftf_irq_enable(IRQ_WAKE_SGI, GIC_HIGHEST_NS_PRIORITY);

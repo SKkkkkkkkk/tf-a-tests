@@ -12,3 +12,8 @@ tags
 # Ignore build directory and binary files
 build/
 *.bin
+compile_commands.json
+.vscode/
+.DS_Store
+gdb*
+*.log
