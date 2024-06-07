@@ -90,3 +90,15 @@ const mmap_region_t *tftf_platform_get_mmap(void)
 {
 	return mmap;
 }
+
+
+void tftf_platform_end(void)
+{
+	/*
+	 * Send EOT (End Of Transmission) on the UART.
+	 * This can be used to shutdown a software model.
+	 */
+	static const char ascii_eot = 4;
+	console_putc(ascii_eot);
+	*(volatile uint32_t*)(SYSCTRL_CFG_BASE + 0x400) = 0;
+}
