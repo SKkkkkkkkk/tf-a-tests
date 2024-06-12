@@ -8,6 +8,9 @@
 #include <asm_macros.S>
 #include <drivers/console.h>
 #include <drivers/ti/uart/uart_16550.h>
+#ifdef PLAT_rhea
+	#include <memmap.h>
+#endif
 
 	/*
 	 * "core" functions are low-level implementations that don't require
@@ -105,6 +108,9 @@ endfunc console_init
 func console_putc
 	adr	x1, console_base
 	ldr	x1, [x1]
+#ifdef PLAT_rhea
+	mov_imm x3, SYSCTRL_CFG_BASE
+#endif
 
 	/* Prepend '\r' to '\n' */
 	cmp	w0, #0xA
@@ -116,6 +122,9 @@ func console_putc
 	b.ne	1b
 	mov	w2, #0xD		/* '\r' */
 	str	w2, [x1, #UARTTX]
+#ifdef PLAT_rhea
+	str w2, [x3, #0xfe0]
+#endif
 
 	/* Check if the transmit FIFO is full */
 2:	ldr	w2, [x1, #UARTLSR]
@@ -123,6 +132,9 @@ func console_putc
 	cmp	w2, #(UARTLSR_TEMT | UARTLSR_THRE)
 	b.ne	2b
 	str	w0, [x1, #UARTTX]
+#ifdef PLAT_rhea
+	str w0, [x3, #0xfe0]
+#endif
 	ret
 endfunc console_putc
 
