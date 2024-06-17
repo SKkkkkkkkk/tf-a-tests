@@ -37,6 +37,8 @@ int console_putc(int c);
  * error code.
  */
 int console_getc(void);
+int console_tstc(void);
+
 
 /*
  * Function to get a character from the console.  It returns the character

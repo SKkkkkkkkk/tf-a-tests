@@ -32,7 +32,6 @@ NS_BL1U_SOURCES := $(addprefix tftf/framework/,		\
 NS_BL1U_SOURCES	+=	drivers/io/io_fip.c				\
 			drivers/io/io_memmap.c				\
 			fwu/ns_bl1u/${ARCH}/ns_bl1u_entrypoint.S	\
-			fwu/ns_bl1u/ns_bl1u_main_rhea.c			\
 			lib/${ARCH}/cache_helpers.S			\
 			lib/${ARCH}/exception_stubs.S			\
 			lib/${ARCH}/misc_helpers.S			\
@@ -45,6 +44,7 @@ NS_BL1U_SOURCES	+=	drivers/io/io_fip.c				\
 			plat/common/${ARCH}/platform_up_stack.S 	\
 			plat/common/plat_common.c
 
+# fwu/ns_bl1u/ns_bl1u_main.c			\
 # plat/arm/common/arm_fwu_io_storage.c		\
 # plat/common/image_loader.c			\
 

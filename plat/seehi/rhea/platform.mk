@@ -9,12 +9,17 @@ drivers/arm/gic/arm_gic_v2v3.c \
 drivers/arm/gic/gic_common.c \
 drivers/arm/gic/gic_v3.c \
 drivers/arm/gic/gic_v2.c \
-plat/seehi/rhea/plat_pwr_state.c \
+plat/seehi/rhea/plat_pwr_state.c
 
+NS_BL1U_INCLUDES += \
+-Iplat/seehi/rhea/ns_bl1u/crc/inc \
+-Iplat/seehi/rhea/ns_bl1u/xmodem/inc
 
-# plat/arm/common/arm_timers.c	\
-# drivers/arm/timer/system_timer.c \
-
+NS_BL1U_SOURCES += \
+plat/seehi/rhea/ns_bl1u/crc/src/crc16.c \
+plat/seehi/rhea/ns_bl1u/xmodem/src/xmodem.c \
+plat/seehi/rhea/ns_bl1u/xmodem/src/xmodem_port.c \
+plat/seehi/rhea/ns_bl1u/ns_bl1u_main_rhea.c
 
 ifeq ($(USE_NVM),1)
 $(error "DUBHE port of TFTF doesn't currently support USE_NVM=1")

@@ -20,6 +20,7 @@
 	.globl console_putc
 	.globl console_getc
 	.globl console_flush
+	.globl console_tstc
 
 	/*
 	 *  The console base is in the data section and not in .bss
@@ -182,3 +183,27 @@ func console_flush
 	mov	w0, #0
 	ret
 endfunc console_flush
+
+
+	/* ---------------------------------------------
+	 * int console_tstc(void)
+	 * Function to check if a character is available
+	 * in the console.
+	 * Out : return 1 if character is available, 0
+	 * otherwise.
+	 * Clobber list : x0, x1
+	 * ---------------------------------------------
+	 */
+func console_tstc
+	ldr x0, =console_base
+	ldr	x0, [x0]
+
+	/* Check if the receive FIFO is empty */
+	ldr	w1, [x0, #UARTLSR]
+	tbz	w1, #UARTLSR_RDR_BIT, console_tstc_no_char
+	mov	w0, #1
+	ret
+console_tstc_no_char:
+	mov	w0, #0
+	ret
+endfunc console_tstc
