@@ -19,3 +19,5 @@ plat/seehi/rhea/plat_pwr_state.c \
 ifeq ($(USE_NVM),1)
 $(error "DUBHE port of TFTF doesn't currently support USE_NVM=1")
 endif
+
+FIRMWARE_UPDATE := 1
