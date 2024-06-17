@@ -54,7 +54,7 @@ func console_init
 	cbz	w1, init_fail
 	cbz	w2, init_fail
 
-	adr	x3, console_base
+	ldr	x3, =console_base
 	str	x0, [x3]
 
 	/* Program the baudrate */
@@ -106,7 +106,7 @@ endfunc console_init
 	 * --------------------------------------------------------
 	 */
 func console_putc
-	adr	x1, console_base
+	ldr x1, =console_base
 	ldr	x1, [x1]
 #ifdef PLAT_rhea
 	mov_imm x3, SYSCTRL_CFG_BASE
@@ -148,7 +148,7 @@ endfunc console_putc
 	 * ---------------------------------------------
 	 */
 func console_getc
-	adr	x0, console_base
+	ldr x0, =console_base
 	ldr	x0, [x0]
 
 	/* Check if the receive FIFO is empty */
@@ -170,7 +170,7 @@ endfunc console_getc
 	 * ---------------------------------------------
 	 */
 func console_flush
-	adr	x0, console_base
+	ldr x0, =console_base
 	ldr	x0, [x0]
 
 	/* Loop until the transmit FIFO is empty */
