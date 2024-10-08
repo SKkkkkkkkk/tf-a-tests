@@ -11,6 +11,7 @@
 #include <platform.h>
 #include <platform_def.h>
 #include <mmio.h>
+#include <chip.h>
 
 #define MAP_DEVICE	MAP_REGION_FLAT( \
 DEVICE_START_BASE, \
@@ -100,5 +101,5 @@ void tftf_platform_end(void)
 	 */
 	static const char ascii_eot = 4;
 	console_putc(ascii_eot);
-	*(volatile uint32_t*)(SYSCTRL_CFG_BASE + 0x400) = 0;
+	system_reset();
 }
